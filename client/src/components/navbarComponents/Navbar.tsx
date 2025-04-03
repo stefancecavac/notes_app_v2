@@ -34,7 +34,7 @@ const Navbar = () => {
     let newWidth = e.clientX;
 
     if (newWidth > 500) newWidth = 500;
-    if (newWidth < 260) newWidth = 260;
+    if (newWidth < 240) newWidth = 240;
     navRef.current.style.width = `${newWidth}px`;
     setWidth(newWidth);
     setResizing(true);

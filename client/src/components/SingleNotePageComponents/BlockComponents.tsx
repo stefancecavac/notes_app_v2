@@ -11,7 +11,7 @@ const BlockComponent = ({ block, nextBlock, singleNoteLoading }: blockComponentP
   if (singleNoteLoading) return null;
 
   return (
-    <div className={`rounded-lg   pl-0  transition-all  relative group/handle`}>
+    <div className={`rounded-lg  transition-all hover:cursor-text  relative group/handle`}>
       {(() => {
         switch (block?.type) {
           case "text":
@@ -22,7 +22,7 @@ const BlockComponent = ({ block, nextBlock, singleNoteLoading }: blockComponentP
             return <p>todo block : {block.properties.title}</p>;
         }
       })()}
-      <div className="absolute   flex-row-reverse gap-1  items-center -left-20  top-0 px-5 hidden group-hover/handle:flex scale-up-center ">
+      <div className="absolute   flex-row-reverse gap-1  items-center -left-20 top-1 px-5 hidden group-hover/handle:flex scale-up-center ">
         <div className="btn btn-xs btn-ghost hover:bg-base-300 text-info-content btn-square">
           <svg
             xmlns="http://www.w3.org/2000/svg"

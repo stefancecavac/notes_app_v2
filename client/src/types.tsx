@@ -25,6 +25,14 @@ export const updateBlockSchema = z.object({
 
 export type UpdateBlockData = z.infer<typeof updateBlockSchema>;
 
+export const createBlockSchema = z.object({
+  noteId: z.string({ message: "Note id required" }).uuid({ message: "Not a valid UUID" }),
+  type: z.enum(["text", "image", "to-do"], { message: "Invalid type" }),
+  properties: z.object({ title: z.string() }),
+});
+
+export type CreateBlockData = z.infer<typeof createBlockSchema>;
+
 export const noteTableSchema = z.object({
   id: z.string({ message: "Note id required" }).uuid({ message: "Not a valid uuid" }),
   noteTitle: z.string({ message: "Note title required" }).max(255, { message: "255 maximum characters allowed" }),

@@ -69,3 +69,26 @@
   --color-error: oklch(70% 0.2 30);
   --depth: 0;
 }
+
+/* rich editor css*/
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 8px 0;
+  min-height: 20px;
+}
+
+[contentEditable="true"]:empty:before {
+  content: attr(placeholder);
+  opacity: 0.6;
+}
+
+.selectable-block {
+  user-select: text; /* Ensures text can be selected */
+  cursor: text; /* Change cursor to indicate selectable text */
+}
+
+selectable-block:focus {
+  outline: none;
+}

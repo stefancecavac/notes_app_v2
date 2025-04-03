@@ -7,7 +7,7 @@ export const createBlockController = async (req: Request, res: Response, next: N
 
     const createdBlock = await createBlockService({ noteId, properties, type });
 
-    res.status(201).json(createdBlock);
+    res.status(201).json(createdBlock[0]);
   } catch (error) {
     next(error);
   }
@@ -31,7 +31,7 @@ export const deleteBlockController = async (req: Request, res: Response, next: N
 
     const deletedBlock = await deleteBlockService(id);
 
-    res.status(201).json(deletedBlock);
+    res.status(201).json(deletedBlock[0]);
   } catch (error) {
     next(error);
   }
