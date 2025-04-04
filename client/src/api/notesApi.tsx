@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../config/ApiClient";
 import { useParams } from "react-router-dom";
-import { NoteData } from "../types";
+import { NoteData, UpdateBlockData, UpdateNoteData } from "../types";
 
 export const useGetAllNotes = () => {
   const getAllNotesApi = async () => {
@@ -30,4 +30,19 @@ export const useGetSingleNote = () => {
   });
 
   return { note, noteLoading };
+};
+
+export const useUpdateNote = () => {
+  const { noteId } = useParams();
+  const updateNoteApi = async ({ noteTitle, blocks, id }: UpdateNoteData) => {
+    const response = await axiosInstance.patch(`/notes/update`, { noteTitle, blocks, id });
+    return response.data as NoteData;
+  };
+
+  const { mutate: updateNote } = useMutation({
+    mutationKey: ["note", noteId],
+    mutationFn: updateNoteApi,
+  });
+
+  return { updateNote };
 };

@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { notesTable } from "../db/schema/notes";
+import { notesTable, UpdateNoteData } from "../db/schema/notes";
 import AppError from "../middleware/errorHandler";
 import { blocksTable } from "../db/schema/blocks";
 
@@ -15,16 +15,12 @@ export const getAllNotesService = async () => {
 
 export const getNoteByIdService = async (noteId: string) => {
   try {
-    const singleNote = await db
-      .select()
-      .from(notesTable)
-      .where(eq(notesTable.id, noteId))
-      .leftJoin(blocksTable, eq(blocksTable.noteId, notesTable.id));
+    const singleNote = await db.select().from(notesTable).where(eq(notesTable.id, noteId));
 
     if (singleNote.length === 0) {
       return [];
     } else {
-      return { ...singleNote[0]?.notes, blocks: singleNote?.filter((filtered) => filtered.blocks)?.map((note) => note.blocks) };
+      return singleNote[0];
     }
   } catch (error) {
     console.log(error);
@@ -37,6 +33,17 @@ export const insertNoteIntoDbService = async ({ noteTitle }: { noteTitle: string
     const createdNote = await db.insert(notesTable).values({ noteTitle }).returning();
     return createdNote;
   } catch (error) {
+    throw new AppError("Database Error", 500);
+  }
+};
+
+export const updateNoteService = async ({ noteTitle, blocks, id }: UpdateNoteData) => {
+  try {
+    const updatedNote = await db.update(notesTable).set({ noteTitle: noteTitle, blocks: blocks }).where(eq(notesTable.id, id)).returning();
+    console.log(updatedNote);
+    return updatedNote;
+  } catch (error) {
+    console.log(error);
     throw new AppError("Database Error", 500);
   }
 };

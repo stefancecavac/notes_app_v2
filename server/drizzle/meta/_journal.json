@@ -22,6 +22,27 @@
       "when": 1743585716365,
       "tag": "0002_mushy_ronan",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1743760138818,
+      "tag": "0003_magical_corsair",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1743760357133,
+      "tag": "0004_motionless_triathlon",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1743760630563,
+      "tag": "0005_unique_mystique",
+      "breakpoints": true
     }
   ]
 }

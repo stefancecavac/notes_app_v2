@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { deleteNoteByIdService, getAllNotesService, getNoteByIdService, insertNoteIntoDbService } from "../service/notesService";
+import { deleteNoteByIdService, getAllNotesService, getNoteByIdService, insertNoteIntoDbService, updateNoteService } from "../service/notesService";
 import AppError from "../middleware/errorHandler";
 
 export const getAllNotesController = async (req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +33,16 @@ export const createNotecontroller = async (req: Request, res: Response, next: Ne
     const { noteTitle } = req.body;
     const allNotes = await insertNoteIntoDbService({ noteTitle });
     res.status(200).json(allNotes);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateNoteController = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { noteTitle, blocks, id } = req.body;
+    const updatedNote = await updateNoteService({ noteTitle, blocks, id });
+    res.status(200).json(updatedNote);
   } catch (error) {
     next(error);
   }

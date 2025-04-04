@@ -1,17 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { createBlockService, deleteBlockService, updateBlockService } from "../service/blocksService";
-
-export const createBlockController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { noteId, properties, type } = req.body;
-
-    const createdBlock = await createBlockService({ noteId, properties, type });
-
-    res.status(201).json(createdBlock[0]);
-  } catch (error) {
-    next(error);
-  }
-};
+import { deleteBlockService, updateBlockService } from "../service/blocksService";
 
 export const updateBlockController = async (req: Request, res: Response, next: NextFunction) => {
   try {
